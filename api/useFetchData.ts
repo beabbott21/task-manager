@@ -1,19 +1,26 @@
-import axios from 'axios';
+import axios, { Method } from 'axios';
 import { useState, useEffect, ReactNode } from 'react';
 import { ApiResponse, AxiosResponse } from '../shared/types';
 
-export const useFetchData = <T>(url: string, dep?: ReactNode): AxiosResponse<T> => {
+export const useFetchData = <T>(
+  method: Method,
+  baseURL: string,
+  payload?: any,
+  dep?: ReactNode
+): AxiosResponse<T> => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log(dep);
+
   const fetchData = () => {
-    axios
-      .get(url, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
+    axios({
+      method,
+      baseURL,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: payload
+    })
       .then((res: ApiResponse) => {
         setData(res.data);
       })
@@ -23,7 +30,6 @@ export const useFetchData = <T>(url: string, dep?: ReactNode): AxiosResponse<T> 
 
   useEffect(() => {
     if (dep === undefined) return;
-    console.log('fetching');
     setLoading(true);
     fetchData();
   }, [dep]);
