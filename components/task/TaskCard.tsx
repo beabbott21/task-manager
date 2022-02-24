@@ -1,4 +1,4 @@
-import { useState } from 'react';
+//import { useState } from 'react';
 import { Priority, TaskAssignment } from '../../shared/types';
 import * as S from './styles';
 
@@ -11,8 +11,8 @@ const TaskCard = ({ assignment }: { assignment: TaskAssignment }) => {
   const { task, user } = assignment;
   const { id, title, details, priority } = task;
   const { first_name, last_name } = user;
-  const [userOpen, setUserOpen] = useState<boolean>(false);
-  const [cardExpanded, setCardExpanded] = useState<boolean>(false);
+  //const [userOpen, setUserOpen] = useState<boolean>(false);
+  //const [cardExpanded, setCardExpanded] = useState<boolean>(false);
 
   return (
     <S.Card>

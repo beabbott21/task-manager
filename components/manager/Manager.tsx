@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 const Manager = () => {
   // I would rather let the backend handle the filtering but deep filtering
   // does not work as intended in json-server documentation.
-  const { data, error, loading, fetchData } = useFetchData<TaskAssignment>(
+  const { data, loading } = useFetchData<TaskAssignment>(
     'get',
     ASSIGNMENTS_TASKS_USERS_API,
     {},
