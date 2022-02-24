@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
 
 export const Card = styled.div`
-  background: #fcfcfc;
   border-radius: 6px;
   padding: 6px;
   margin-bottom: 16px;
   height: 120px;
-  box-shadow: -1px 1px 5px #8b8b8b;
+
   display: grid;
   grid-gap: 8px;
   grid-template-columns: 1fr auto auto;

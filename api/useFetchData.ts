@@ -12,10 +12,13 @@ export const useFetchData = <T>(
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // tmp
+  const url = baseURL + '&_limit=20';
+
   const fetchData = () => {
     axios({
       method,
-      baseURL,
+      url,
       headers: {
         'Content-Type': 'application/json'
       },

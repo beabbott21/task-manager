@@ -12,8 +12,7 @@ const tasks = async (req: NextApiRequest, res: NextApiResponse<Task>) => {
       getHandler<Task>(req, res, TASKS_URL, 'get');
       break;
     case 'PUT':
-      // Update or create data in your database
-
+      getHandler<Task>(req, res, TASKS_URL, 'put', body);
       break;
     case 'POST':
       // Update or create data in your database

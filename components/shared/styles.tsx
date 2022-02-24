@@ -36,3 +36,9 @@ export const Message = styled.div`
   font-size: 18px;
   font-weight: 600;
 `;
+
+export const Draggable = styled.div<{ isDragging: boolean }>`
+  border-radius: 6px;
+  background: ${({ isDragging }) => (isDragging ? '#cff3ff' : '#fcfcfc')};
+  box-shadow: ${({ isDragging }) => (isDragging ? 'none' : '-1px 1px 5px #8b8b8b')};
+`;
