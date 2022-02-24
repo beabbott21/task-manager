@@ -1,16 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
-import { Person } from '../../../shared/types';
+import handler from '../../../api/handler';
+import { TaskAssignment } from '../../../shared/types';
+import { ASSIGNMENTS_URL } from '../../../shared/constants';
 
-const ASSIGNMENTS_URL = 'http://localhost:3001/task_assignments';
-
-const handler = async (req: NextApiRequest, res: NextApiResponse<Person>) => {
-  await axios
-    .get(ASSIGNMENTS_URL, {
-      params: req.query
-    })
-    .then((response) => res.status(200).json(response.data))
-    .catch((err) => res.json(err.message));
+const assignments = async (req: NextApiRequest, res: NextApiResponse<TaskAssignment>) => {
+  handler<TaskAssignment>(req, res, ASSIGNMENTS_URL);
 };
 
-export default handler;
+export default assignments;

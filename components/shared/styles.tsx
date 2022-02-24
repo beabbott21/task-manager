@@ -1,13 +1,16 @@
 import styled from '@emotion/styled';
 
-export const Column = styled.div`
+export const Container = styled.div`
+  background: #dcdcdc;
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: -1px 1px 4px #a0a3a0;
+`;
+export const Column = styled(Container)`
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: #d8d8d8;
-  border-radius: 6px;
-  padding: 16px;
-  max-height: 80vh;
+  height: 80vh;
 `;
 
 export const ColumnHeader = styled.div`
@@ -15,12 +18,13 @@ export const ColumnHeader = styled.div`
   font-weight: 600;
   text-align: left;
   width: 100%;
+  padding-bottom: 16px;
 `;
 
 export const List = styled.div`
   width: 100%;
   min-height: 300px;
-  padding: 16px 4px;
+  padding: 0 4px;
   overflow: scroll;
 `;
 

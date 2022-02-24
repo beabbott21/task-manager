@@ -16,7 +16,7 @@ export type Address = {
   zip: string;
 };
 
-export type Person = {
+export type User = {
   id: number;
   user_name: string;
   first_name: string;
@@ -34,13 +34,14 @@ export type Task = {
   completed: string;
   priority: Priority;
   date_created: string;
-  person?: Person;
+  user?: User;
 };
 
 export type TaskAssignment = {
   id: string;
   taskId: number;
-  personId: number;
+  userId: number;
   accepted: boolean;
   task: Task;
+  user: User;
 };

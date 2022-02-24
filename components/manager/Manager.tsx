@@ -1,29 +1,44 @@
-import { useEffect, useState } from 'react';
 import * as S from './styles';
 import TaskColumn from '../shared/TaskColumn';
 import { useFetchData } from '../../api/useFetchData';
 import { TaskAssignment } from '../../shared/types';
+import { ASSIGNMENTS_TASKS_USERS_API } from '../../shared/constants';
+import { useMemo } from 'react';
+
 const Manager = () => {
-  // const [backlogTasks, setBackogTasks] = useState([]);
-  // const [inProgressTasks, setInProgressTasks] = useState([]);
-  // const [completedTasks, setCompletedTasks] = useState([]);
+  // I would rather let the backend handle the filtering but deep filtering
+  // does not work as intended in json-server documentation.
   const { data, error, loading, fetchData } = useFetchData<TaskAssignment>(
-    '/api/assignments?_expand=task'
+    ASSIGNMENTS_TASKS_USERS_API,
+    null
   );
+  const { backlog, inProgress, complete } = useMemo((): {
+    backlog: TaskAssignment[];
+    inProgress: TaskAssignment[];
+    complete: TaskAssignment[];
+  } => {
+    const backlog: TaskAssignment[] = [],
+      inProgress: TaskAssignment[] = [],
+      complete: TaskAssignment[] = [];
 
-  // useEffect(() => {
-  //   if (loading) return;
+    if (data.length && !loading) {
+      data.forEach((ta) => {
+        if (ta.task?.completed) {
+          complete.push(ta);
+        } else if (ta.accepted) {
+          inProgress.push(ta);
+        } else backlog.push(ta);
+      });
+    }
 
-  // }, [data, loading]);
+    return { backlog, inProgress, complete };
+  }, [data, loading]);
 
   return (
     <S.Manager>
-      <TaskColumn name={'Backlog'} tasks={data?.filter((ta: TaskAssignment) => !ta.accepted)} />
-      <TaskColumn name={'In Progress'} tasks={data?.filter((ta: TaskAssignment) => ta.accepted)} />
-      <TaskColumn
-        name={'Completed'}
-        tasks={data?.filter((ta: TaskAssignment) => ta.task?.completed)}
-      />
+      <TaskColumn name={'Backlog'} isLoading={loading} tasks={backlog} />
+      <TaskColumn name={'In Progress'} isLoading={loading} tasks={inProgress} />
+      <TaskColumn name={'Completed'} isLoading={loading} tasks={complete} />
     </S.Manager>
   );
 };

@@ -1,12 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
-import { Person } from '../../../shared/types';
+import handler from '../../../api/handler';
+import { User } from '../../../shared/types';
+import { USERS_URL } from '../../../shared/constants';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse<Person>) => {
-  await axios
-    .get('http://localhost:3001/people')
-    .then((response) => res.status(200).json(response.data))
-    .catch((err) => res.json(err.message));
+const people = async (req: NextApiRequest, res: NextApiResponse<User>) => {
+  handler<User>(req, res, USERS_URL);
 };
 
-export default handler;
+export default people;

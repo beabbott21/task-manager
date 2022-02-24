@@ -3,11 +3,12 @@ import styled from '@emotion/styled';
 export const Card = styled.div`
   background: #fcfcfc;
   border-radius: 6px;
-  padding: 8px;
-  margin-bottom: 8px;
+  padding: 6px;
+  margin-bottom: 16px;
   height: 120px;
   box-shadow: -1px 1px 5px #8b8b8b;
   display: grid;
+  grid-gap: 8px;
   grid-template-columns: 1fr auto auto;
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
@@ -20,8 +21,9 @@ export const Card = styled.div`
 export const Title = styled.div`
   grid-area: title;
   width: 100%;
+  max-height: 42px;
   text-align: left;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 `;
 
@@ -42,16 +44,18 @@ export const Details = styled.div`
   grid-area: details;
   width: 100%;
   text-align: left;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
   overflow: auto;
 `;
 
 export const Person = styled.div`
   grid-area: person;
   align-self: flex-end;
-  height: 20px;
-  width: 20px;
+  height: 28px;
+  width: 28px;
+  font-size: 15px;
+  padding: 6px 0;
   border-radius: 50%;
   text-align: center;
   background: #becad6;

@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { ApiResponse, AxiosResponse } from '../types/api';
+import { useState, useEffect, ReactNode } from 'react';
+import { ApiResponse, AxiosResponse } from '../shared/types';
 
-export const useFetchData = <T>(url: string): AxiosResponse<T> => {
+export const useFetchData = <T>(url: string, dep?: ReactNode): AxiosResponse<T> => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  console.log(dep);
   const fetchData = () => {
     axios
       .get(url, {
@@ -22,8 +22,11 @@ export const useFetchData = <T>(url: string): AxiosResponse<T> => {
   };
 
   useEffect(() => {
+    if (dep === undefined) return;
+    console.log('fetching');
+    setLoading(true);
     fetchData();
-  }, []);
+  }, [dep]);
 
-  return { data, error, loading };
+  return { data, error, loading, fetchData };
 };
